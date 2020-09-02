@@ -1,0 +1,44 @@
+.card{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    background-color:aqua;
+    
+
+}
+
+.body-card-registration {
+    border: black 1px ;
+    width: 800px;
+    margin-top: 25%;
+    margin-left: 25%;
+    border-radius: 5px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.background {
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-color: white;
+}
+
+.header{
+    background-color:#28a84b !important;
+    text-align:center;
+    font-weight:bold;
+    font-size:25px;
+    color:white;
+    
+}
+.submit-button {
+    float:right !important;
+    background-color:#28a84b !important;
+  }
+
+.submit-button:hover {
+    background-color: #31B620 !important;
+    border-color: white !important;
+  }

@@ -1,0 +1,351 @@
+.App {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+  }
+  
+  @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: #fafafa;
+    overflow: hidden;
+  }
+  
+  
+  .sidebar a,
+  a:hover,
+  a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  
+  /* ---------------------------------------------------
+    SIDEBAR STYLE
+  ----------------------------------------------------- */
+  .sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    background: #28a84b;
+    color: #fff;
+    margin-left: -250px;
+    transition: all 0.5s;
+    height: 100vh;
+  }
+  
+  .sidebar.is-open {
+    margin-left: 0;
+    transition: .5s;
+  }
+  
+  .sidebar-header {
+    background: #28a84b;
+  }
+  
+  .sidebar-header h3 {
+    color: #fff;
+    padding: 1em;
+  }
+  
+  .sidebar ul p {
+    color: #fff;
+    padding: 10px;
+  }
+  
+  .menu-open {
+    background: #28a84b;
+  }
+  
+  .nav-item:hover {
+    color: #28a84b;
+    background: #fff;
+  }
+  
+  .items-menu {
+    color: #fff;
+    background: #28a84b;
+  }
+  
+  li a.dropdown-toggle::after {
+    display: inline-flex;
+    position: relative;
+    /* left: 60%; */
+    top: 10%
+  }
+  
+  .sidebar-header>a {
+    position: relative;
+    float: right;
+    margin: .5em;
+    font-size: 2rem;
+    cursor: pointer;
+    display: none;
+  }
+  
+  .sidebar-icon {
+    width: 30px;
+    display: inline-block;
+  }
+  
+  /* ---------------------------------------------------
+    CONTENT STYLE
+  ----------------------------------------------------- */
+  .content {
+    /* padding: 20px; */
+    margin-left: 0;
+    height: 88vh;
+    overflow-y: auto;
+  }
+  
+  @media only screen and (max-width: 500px) {
+    body {
+      overflow: hidden;
+    }
+  
+    .content.is-open {
+      margin-left: 100%;
+    }
+  
+    .sidebar.is-open {
+      min-width: 100%;
+      max-width: 100%;
+      margin-left: 0;
+      transition: all 0.5s, height 0s;
+    }
+  
+    .sidebar.is-open>.sidebar-header a {
+      display: unset;
+    }
+  
+    li a.dropdown-toggle::after {
+      display: inline-block;
+      position: relative;
+      left: 68%;
+    }
+  }
+  
+  .activeLink {
+    font-weight: bold;
+    background: grey;
+  }
+  
+  .toggle-btn {
+    margin-right: 10px;
+  }
+  
+  .coupons-titles {
+    color: gray;
+  }
+  
+  .form-label {
+    text-align: right;
+  }
+  
+  .coupon-details {
+    text-align: right;
+  }
+  
+  .loading-position {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .custom-checkbox {
+    margin-top: 7px;
+  }
+  
+  .btn-selected-domain {
+    margin-right: 5px;
+    margin-bottom: 5px;
+  }
+  
+  .react-datepicker-wrapper,
+  .react-datepicker__input-container,
+  .react-datepicker__input-container input {
+    display: block;
+    width: 100%;
+  }
+  
+  .profile-card-icons {
+    margin-left: 10px;
+    bottom: 20px;
+    position: absolute;
+  }
+  
+  .profile-card-default {
+    overflow: 'visible';
+    height: '100%';
+  }
+  
+  .profile-card-highlight {
+    overflow: 'visible';
+    height: '100%';
+    background-color: rgb(10, 64, 214);
+  }
+  
+  .profile-chat-icon {
+    color: gray;
+    font-size: 35px;
+    cursor: pointer;
+  }
+  
+  .profile-like-icon-active {
+    margin-left: 2.5em;
+    color: #FFE4B5;
+    font-size: 35px;
+    cursor: pointer;
+  }
+  
+  .profile-like-icon-notactive {
+    margin-left: 2.5em;
+    color: gray;
+    font-size: 35px;
+    cursor: pointer;
+  }
+  
+  .profile-favorite-icon-active {
+    margin-left: 2.5em;
+    color: pink;
+    font-size: 35px;
+    cursor: pointer;
+  }
+  
+  .profile-favorite-icon-notactive {
+    margin-left: 2.5em;
+    color: gray;
+    font-size: 35px;
+    cursor: pointer;
+  }
+  
+  .spinner {
+    width: 3rem;
+    height: 3rem;
+  }
+  
+  .form-input-error {
+    color: red;
+    font-size: 13px;
+  }
+  
+  .green-icon {
+    color: green;
+  }
+  
+  .red-icon {
+    color: red;
+  }
+  
+  .red {
+    color: red;
+  }
+  
+  .no-records-found {
+    text-align: center;
+  }
+  
+  .icon-pointer {
+    cursor: pointer;
+  }
+  
+  .counter {
+    margin-left: 10px;
+  }
+  
+  /* ---------------------------------------------------
+    DROPZONE UPLOADER
+  ----------------------------------------------------- */
+  .dzu-dropzone {
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+  
+  /* ---------------------------------------------------
+    LOGIN
+  ----------------------------------------------------- */
+  
+  .login {
+    padding: 200px 0;
+    margin: 0 auto;
+    width: 500px;
+  
+  }
+  
+  .login-card {
+    background-color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .login-card-header {
+    background-color: gray;
+    color: white;
+  }
+  
+  .login-buttons {
+    background: #6d7fcc;
+    width: 100px;
+    margin-right: 10px;
+  }
+  
+  .login-buttons:hover {
+    background-color: #37478d;
+  }
+  
+  .wallpaper {
+    background-image: url('http://www.tasoeur.biz/images/2017/08/26/megafox-fred176.jpg');
+    height: 100%;
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+  
+  /* ---------------------------------------------------
+    CONTRACT
+  ----------------------------------------------------- */
+  .contract {
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .contract-revenue-percentage {
+    width: 80px;
+    font-size: 1.2rem;
+    margin: 10px auto;
+    padding: 10px;
+    text-align: center;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+  }
+  
+  .contract-slider {
+    display: block;
+    margin: 30px auto;
+    width: 50%;
+  }
+  
+  .contract-button{
+    margin-right: 10px;
+  }
+  
+  .hourInput {
+    display: inline-block;
+  }
+  
+  .hourInput-label {
+    width: 100px;
+    margin-left: 10px;
+  }
+  
+  .likes-views-ratio {
+    width: 150px;
+    padding-bottom: 10px;
+  }
+  
+  .column{
+    padding-bottom: 10px;
+  }

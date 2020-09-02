@@ -1,0 +1,26 @@
+.iban{
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 12px;
+  padding-right: 12px;
+  border-radius: 0.25rem;
+  border: 1px solid #ced4da;
+  width:220px;
+}
+
+.phone{
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 0.25rem;
+    border: 1px solid #ced4da;
+  }
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    border-radius: 20%;
+  }

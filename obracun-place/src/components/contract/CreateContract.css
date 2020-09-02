@@ -1,0 +1,8 @@
+.date{
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 0.25rem;
+    border: 1px solid #ced4da;
+  }
