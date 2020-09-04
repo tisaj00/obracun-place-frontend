@@ -61,7 +61,6 @@ class ViewPartners extends Component {
     this.setState({ isLoading: true });
     await axios.delete(`http://localhost:9088/partner/delete/${this.state.partnerTodelete.id}`, {
       headers: {
-        'X-XSRF-TOKEN': this.state.xsrfToken,
         'Accept': 'application/json'
       },
       withCredentials: true
@@ -91,7 +90,6 @@ class ViewPartners extends Component {
 
     await axios.get('http://localhost:9088/partner/all?&page=' + page + '&size=' + size, {
       headers: {
-        'X-XSRF-TOKEN': this.state.xsrfToken,
         'Accept': 'application/json'
       },
       withCredentials: true

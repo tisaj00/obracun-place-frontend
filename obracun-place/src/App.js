@@ -77,14 +77,11 @@ class App extends Component {
         cookies.remove('access_token');
         cookies.remove('refresh_token');
     }
-
+*/
     toggle = () => {
         this.setState({ isOpen: !this.state.isOpen });
     }
- */
-
-
-
+ 
     refresh() {
         this.setState({ isAuthenticated: !this.state.isAuthenticated });
     }

@@ -96,7 +96,6 @@ class CreatePartner extends Component {
       this.setState({ isLoading: true });
       await axios.get(`http://localhost:9088/partner/${this.props.match.params.id}`, {
         headers: {
-          'X-XSRF-TOKEN': this.state.xsrfToken,
           'Accept': 'application/json'
         },
         withCredentials: true
@@ -127,7 +126,6 @@ class CreatePartner extends Component {
 
     axios.get('http://localhost:9088/api/all-cities', {
       headers: {
-        'X-XSRF-TOKEN': xsrfToken,
         'Accept': 'application/json'
       },
       withCredentials: true
@@ -164,7 +162,6 @@ class CreatePartner extends Component {
       method: (partner.id) ? 'PATCH' : 'POST',
       url: (partner.id) ? `http://localhost:9088/partner/patch/${this.props.match.params.id}` : 'http://localhost:9088/partner/new',
       headers: {
-        'X-XSRF-TOKEN': xsrfToken,
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },

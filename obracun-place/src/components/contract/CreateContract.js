@@ -148,7 +148,6 @@ class CreateContract extends Component {
 
     axios.get('http://localhost:9088/v1/api/descriptions', {
       headers: {
-        'X-XSRF-TOKEN': xsrfToken,
         'Accept': 'application/json'
       },
       withCredentials: true
@@ -180,7 +179,6 @@ class CreateContract extends Component {
 
     axios.get('http://localhost:9088/api1/students', {
       headers: {
-        'X-XSRF-TOKEN': xsrfToken,
         'Accept': 'application/json'
       },
       withCredentials: true
@@ -212,7 +210,6 @@ class CreateContract extends Component {
 
     axios.get('http://localhost:9088/partner/all-partners', {
       headers: {
-        'X-XSRF-TOKEN': xsrfToken,
         'Accept': 'application/json'
       },
       withCredentials: true
@@ -249,7 +246,6 @@ class CreateContract extends Component {
       method: (contract.id) ? 'PATCH' : 'POST',
       url: (contract.id) ? `http://localhost:9088/contract/patch-contract/${this.props.match.params.id}` : 'http://localhost:9088/contract/new',
       headers: {
-        'X-XSRF-TOKEN': xsrfToken,
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
@@ -283,7 +279,6 @@ class CreateContract extends Component {
       this.setState({ isLoading: true });
       await axios.get(`http://localhost:9088/contract/${this.props.match.params.id}`, {
         headers: {
-          'X-XSRF-TOKEN': this.state.xsrfToken,
           'Accept': 'application/json'
         },
         withCredentials: true

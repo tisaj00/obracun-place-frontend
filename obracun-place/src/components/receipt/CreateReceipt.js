@@ -156,7 +156,6 @@ class CreateReceipt extends Component {
       method: 'POST',
       url: 'http://localhost:9088/api/v1/receipt',
       headers: {
-        'X-XSRF-TOKEN': xsrfToken,
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },

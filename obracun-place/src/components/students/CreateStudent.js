@@ -84,6 +84,7 @@ class CreateStudent extends Component {
         this.getCitys();
         this.getFacultys();
         this.getStudentById();
+        console.log(this.state.student)
 
     }
 
@@ -127,8 +128,10 @@ class CreateStudent extends Component {
                     .then(url => {
                         let student = { ...this.state.student }
                         student.imageUrl = url
+                        let patchStudent = {...this.state.patchStudent}
+                        patchStudent.imageUrl = url
                         console.log(url)
-                        this.setState({ student: student, avatarImage: url })
+                        this.setState({ student: student,patchStudent:patchStudent})
                     })
             }
         )
@@ -175,6 +178,7 @@ class CreateStudent extends Component {
                             appearance: 'error', autoDismiss: true, autoDismissTimeout: 3000
                         });
                     } else {
+                        console.log(response.data.student)
                         this.setState({ student: response.data.student, initialStudent: JSON.parse(JSON.stringify(response.data.student)), isLoading: false });
                     }
                 })
@@ -257,6 +261,7 @@ class CreateStudent extends Component {
         event.preventDefault();
         const { student, xsrfToken, patchStudent } = this.state;
         this.setState({ isLoading: true });
+        console.log("PATH",patchStudent)
 
         await axios({
             method: (student.id) ? 'PATCH' : 'POST',
@@ -497,7 +502,7 @@ class CreateStudent extends Component {
                                         <h5>Image </h5>
                                     </CardHeader>
                                     <CardBody >
-                                            <img src={this.state.avatarImage === '' ? defaultImage : this.state.avatarImage}
+                                            <img src={this.state.student.imageUrl === "" ? defaultImage : this.state.student.imageUrl}
                                                 alt="avatar"
                                                 class="center" />
                                             <Input
