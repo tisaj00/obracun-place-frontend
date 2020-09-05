@@ -34,7 +34,6 @@ class ViewCalculations extends Component {
         super(props);
         const { cookies, toastManager } = props;
         this.state = {
-            xsrfToken: cookies.get('XSRF-TOKEN'),
             isLoading: false,
             calculations: [],
             selectedPage: 1,
@@ -80,9 +79,8 @@ class ViewCalculations extends Component {
     }
 
     async getAllCalculation(page, size) {
-        await axios.get('http://localhost:9088/calculation/all?page=' + page + '&size=' + size, {
+        await axios.get('/calculation/all?page=' + page + '&size=' + size, {
             headers: {
-                'X-XSRF-TOKEN': this.state.xsrfToken,
                 'Accept': 'application/json'
             },
             withCredentials: true

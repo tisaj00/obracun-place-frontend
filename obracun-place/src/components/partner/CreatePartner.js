@@ -39,7 +39,6 @@ class CreatePartner extends Component {
       partner: this.emptyPartner,
       initialPartner: this.emptyPartner,
       patchPartner: this.patchPartner,
-      xsrfToken: cookies.get('XSRF-TOKEN'),
       isLoading: false,
       cities: [],
       validOib: false
@@ -94,7 +93,7 @@ class CreatePartner extends Component {
   async getPartnerById() {
     if (this.props.match.params.id !== undefined) {
       this.setState({ isLoading: true });
-      await axios.get(`http://localhost:9088/partner/${this.props.match.params.id}`, {
+      await axios.get(`/partner/${this.props.match.params.id}`, {
         headers: {
           'Accept': 'application/json'
         },
@@ -122,9 +121,7 @@ class CreatePartner extends Component {
   }
 
   async getCitys() {
-    const { xsrfToken } = this.state;
-
-    axios.get('http://localhost:9088/api/all-cities', {
+    axios.get('/api/all-cities', {
       headers: {
         'Accept': 'application/json'
       },
@@ -153,14 +150,12 @@ class CreatePartner extends Component {
 
   async createOrUpdatePartner(event) {
     event.preventDefault();
-    const { partner, xsrfToken, patchPartner } = this.state;
+    const { partner, patchPartner } = this.state;
     this.setState({ isLoading: true });
-
-    console.log(JSON.parse(JSON.stringify(patchPartner)))
 
     await axios({
       method: (partner.id) ? 'PATCH' : 'POST',
-      url: (partner.id) ? `http://localhost:9088/partner/patch/${this.props.match.params.id}` : 'http://localhost:9088/partner/new',
+      url: (partner.id) ? `/partner/patch/${this.props.match.params.id}` : '/partner/new',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -189,8 +184,6 @@ class CreatePartner extends Component {
           }));
       });
   }
-
-
 
   render() {
     const { partner, isLoading, cities, initialPartner, validOib } = this.state;

@@ -49,7 +49,6 @@ class CreateCalculation extends Component {
             calculation: this.emptyCalculation,
             initialCalculation: this.emptyCalculation,
             patchCalculation: this.patchCalculation,
-            xsrfToken: cookies.get('XSRF-TOKEN'),
             isLoading: false,
             contracts: [],
             calculationCard: false
@@ -103,11 +102,8 @@ class CreateCalculation extends Component {
     }
 
     async getAllContracts() {
-        const { xsrfToken } = this.state;
-
-        axios.get('http://localhost:9088/contract/all-contracts', {
+        axios.get('/contract/all-contracts', {
             headers: {
-                'X-XSRF-TOKEN': xsrfToken,
                 'Accept': 'application/json'
             },
             withCredentials: true
@@ -137,9 +133,8 @@ class CreateCalculation extends Component {
     async getCalculationById() {
         if (this.props.match.params.id !== undefined) {
             this.setState({ isLoading: true });
-            await axios.get(`http://localhost:9088/calculation/${this.props.match.params.id}`, {
+            await axios.get(`/calculation/${this.props.match.params.id}`, {
                 headers: {
-                    'X-XSRF-TOKEN': this.state.xsrfToken,
                     'Accept': 'application/json'
                 },
                 withCredentials: true
@@ -168,13 +163,12 @@ class CreateCalculation extends Component {
 
     async createOrUpdateCalculation(event) {
         event.preventDefault();
-        const { calculation, xsrfToken, patchCalculation } = this.state;
+        const { calculation, patchCalculation } = this.state;
 
         await axios({
             method: (calculation.id) ? 'PATCH' : 'POST',
-            url: (calculation.id) ? `http://localhost:9088/calculation/patch/${this.props.match.params.id}` : 'http://localhost:9088/calculation/new',
+            url: (calculation.id) ? `/calculation/patch/${this.props.match.params.id}` : '/calculation/new',
             headers: {
-                'X-XSRF-TOKEN': xsrfToken,
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },

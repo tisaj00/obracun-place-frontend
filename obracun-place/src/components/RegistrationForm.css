@@ -42,3 +42,27 @@
     background-color: #31B620 !important;
     border-color: white !important;
   }
+
+  .form-input-error {
+    color: #00add1;
+    font-size: 13px;
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .form-input-error-text {
+    color: #a18d81;
+    font-size: 13px;
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .form-input-error-displayed {
+    margin-bottom: 0;
+  }
+  
+  .form-input-error-not-displayed {
+    margin-bottom: 16;
+  }

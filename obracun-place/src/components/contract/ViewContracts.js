@@ -28,7 +28,6 @@ class ViewContracts extends Component {
         const { cookies, toastManager } = props;
         this.state = {
             initialContract: this.emptyContract,
-            xsrfToken: cookies.get('XSRF-TOKEN'),
             isLoading: false,
             contracts: [],
             tooltipOpen: false,
@@ -75,9 +74,8 @@ class ViewContracts extends Component {
     }
 
     getAllContract = async (page, size) => {
-        await axios.get('http://localhost:9088/contract/all?page=' + page + '&size=' + size, {
+        await axios.get('/contract/all?page=' + page + '&size=' + size, {
             headers: {
-                'X-XSRF-TOKEN': this.state.xsrfToken,
                 'Accept': 'application/json'
             },
             withCredentials: true
@@ -108,9 +106,8 @@ class ViewContracts extends Component {
 
     async deleteContract() {
         this.setState({ isLoading: true });
-        await axios.delete(`http://localhost:9088/contract/delete/${this.state.contractToDelete.id}`, {
+        await axios.delete(`/contract/delete/${this.state.contractToDelete.id}`, {
             headers: {
-                'X-XSRF-TOKEN': this.state.xsrfToken,
                 'Accept': 'application/json'
             },
             withCredentials: true
@@ -171,10 +168,8 @@ class ViewContracts extends Component {
     }
 
     async handleInvoicesRequest(contract) {
-
-        await axios.post('http://localhost:9088/api/export/contract-pdf', this.createRequest(contract), {
+        await axios.post('/api/export/contract-pdf', this.createRequest(contract), {
             headers: {
-                'X-XSRF-TOKEN': this.state.xsrfToken,
                 'Content-Type': 'application/json',
                 'Accept': 'application/zip'
             },

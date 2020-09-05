@@ -59,7 +59,6 @@ class CreateStudent extends Component {
             student: this.emptyStudent,
             patchStudent: this.patchStudent,
             initialStudent: this.emptyStudent,
-            xsrfToken: cookies.get('XSRF-TOKEN'),
             isLoading: false,
             cities: [],
             faculties: [],
@@ -164,9 +163,8 @@ class CreateStudent extends Component {
     async getStudentById() {
         if (this.props.match.params.id !== undefined) {
             this.setState({ isLoading: true });
-            await axios.get(`http://localhost:9088/api1/${this.props.match.params.id}`, {
+            await axios.get(`/api/${this.props.match.params.id}`, {
                 headers: {
-                    'X-XSRF-TOKEN': this.state.xsrfToken,
                     'Accept': 'application/json'
                 },
                 withCredentials: true
@@ -194,11 +192,8 @@ class CreateStudent extends Component {
     }
 
     async getFacultys() {
-        const { xsrfToken } = this.state;
-
-        axios.get('http://localhost:9088/api2/all-faculties', {
+        axios.get('/api/all-faculties', {
             headers: {
-                'X-XSRF-TOKEN': xsrfToken,
                 'Accept': 'application/json'
             },
             withCredentials: true
@@ -226,11 +221,8 @@ class CreateStudent extends Component {
     }
 
     async getCitys() {
-        const { xsrfToken } = this.state;
-
-        axios.get('http://localhost:9088/api/all-cities', {
+        axios.get('/api/all-cities', {
             headers: {
-                'X-XSRF-TOKEN': xsrfToken,
                 'Accept': 'application/json'
             },
             withCredentials: true
@@ -259,15 +251,14 @@ class CreateStudent extends Component {
 
     async createOrUpdateStudent(event) {
         event.preventDefault();
-        const { student, xsrfToken, patchStudent } = this.state;
+        const { student,  patchStudent } = this.state;
         this.setState({ isLoading: true });
         console.log("PATH",patchStudent)
 
         await axios({
             method: (student.id) ? 'PATCH' : 'POST',
-            url: (student.id) ? `http://localhost:9088/api1/patch-student/${this.props.match.params.id}` : 'http://localhost:9088/api1/student',
+            url: (student.id) ? `/api/patch-student/${this.props.match.params.id}` : '/api/student',
             headers: {
-                'X-XSRF-TOKEN': xsrfToken,
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },

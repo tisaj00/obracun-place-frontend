@@ -39,7 +39,7 @@ class LoginForm extends React.Component {
     async signIn() {
         await axios({
             method: 'POST',
-            url: 'http://localhost:9088/api/auth/login',
+            url: '/api/auth/login',
             data: this.state.userData
         })
             .then(response => {

@@ -61,7 +61,6 @@ class CreateContract extends Component {
       contract: this.emptyContract,
       initialContract: this.emptyContract,
       patchContract: this.patchContract,
-      xsrfToken: cookies.get('XSRF-TOKEN'),
       isLoading: false,
       partners: [],
       students: [],
@@ -144,9 +143,7 @@ class CreateContract extends Component {
   }
 
   async getDescriptions() {
-    const { xsrfToken } = this.state;
-
-    axios.get('http://localhost:9088/v1/api/descriptions', {
+    axios.get('/v1/api/descriptions', {
       headers: {
         'Accept': 'application/json'
       },
@@ -175,9 +172,7 @@ class CreateContract extends Component {
   }
 
   async getAllStudents() {
-    const { xsrfToken } = this.state;
-
-    axios.get('http://localhost:9088/api1/students', {
+    axios.get('/api/students', {
       headers: {
         'Accept': 'application/json'
       },
@@ -206,9 +201,7 @@ class CreateContract extends Component {
   }
 
   async getAllPartners() {
-    const { xsrfToken } = this.state;
-
-    axios.get('http://localhost:9088/partner/all-partners', {
+    axios.get('/partner/all-partners', {
       headers: {
         'Accept': 'application/json'
       },
@@ -237,14 +230,13 @@ class CreateContract extends Component {
 
   async createOrUpdateContract(event) {
     event.preventDefault();
-    const { contract, xsrfToken, patchContract } = this.state;
+    const { contract, patchContract } = this.state;
     this.setState({ isLoading: true });
     contract.status = "IZDAN";
-    console.log()
 
     await axios({
       method: (contract.id) ? 'PATCH' : 'POST',
-      url: (contract.id) ? `http://localhost:9088/contract/patch-contract/${this.props.match.params.id}` : 'http://localhost:9088/contract/new',
+      url: (contract.id) ? `/contract/patch-contract/${this.props.match.params.id}` : '/contract/new',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -277,7 +269,7 @@ class CreateContract extends Component {
   async getContractById() {
     if (this.props.match.params.id !== undefined) {
       this.setState({ isLoading: true });
-      await axios.get(`http://localhost:9088/contract/${this.props.match.params.id}`, {
+      await axios.get(`/contract/${this.props.match.params.id}`, {
         headers: {
           'Accept': 'application/json'
         },

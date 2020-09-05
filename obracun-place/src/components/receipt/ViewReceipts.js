@@ -33,7 +33,6 @@ class ViewReceipts extends Component {
     super(props);
     const { cookies, toastManager } = props;
     this.state = {
-      xsrfToken: cookies.get('XSRF-TOKEN'),
       isLoading: false,
       receipts: [],
       receipt: this.emptyReceipt,
@@ -108,9 +107,8 @@ class ViewReceipts extends Component {
   async statusChangeReceipt() {
     await axios({
       method: 'PUT',
-      url: 'http://localhost:9088/api/v1/status/' + this.state.statusChange.id,
+      url: '/api/v1/status/' + this.state.statusChange.id,
       headers: {
-        'X-XSRF-TOKEN': this.state.xsrfToken,
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
@@ -163,11 +161,8 @@ class ViewReceipts extends Component {
   }
 
   async handleInvoicesRequest(receipt) {
-
-    console.log(this.createRequest(receipt))
-    await axios.post('http://localhost:9088/api/export/receipt-pdf', this.createRequest(receipt), {
+    await axios.post('/api/export/receipt-pdf', this.createRequest(receipt), {
       headers: {
-        'X-XSRF-TOKEN': this.state.xsrfToken,
         'Content-Type': 'application/json',
         'Accept': 'application/zip'
       },
@@ -198,9 +193,8 @@ class ViewReceipts extends Component {
   }
 
   async getReceipts(page, size) {
-    await axios.get('http://localhost:9088/api/v1/all?page=' + page + '&size=' + size, {
+    await axios.get('/api/v1/all?page=' + page + '&size=' + size, {
       headers: {
-        'X-XSRF-TOKEN': this.state.xsrfToken,
         'Accept': 'application/json'
       },
       withCredentials: true

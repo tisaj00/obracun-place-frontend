@@ -51,7 +51,6 @@ class CreateReceipt extends Component {
       receipt: this.emptyReceipt,
       initialReceipt: this.emptyReceipt,
       patchReceipt: this.patchReceipt,
-      xsrfToken: cookies.get('XSRF-TOKEN'),
       isLoading: false,
       calculations: [],
       receiptsCard: false,
@@ -115,11 +114,8 @@ class CreateReceipt extends Component {
 
 
   async getAllCalculations() {
-    const { xsrfToken } = this.state;
-
-    axios.get('http://localhost:9088/calculation/all-calculations', {
+    axios.get('/calculation/all-calculations', {
       headers: {
-        'X-XSRF-TOKEN': xsrfToken,
         'Accept': 'application/json'
       },
       withCredentials: true
@@ -148,13 +144,12 @@ class CreateReceipt extends Component {
 
   async createReceipt(event) {
     event.preventDefault();
-    const { receipt, xsrfToken, } = this.state;
-
+    const { receipt } = this.state;
     this.setState({ isLoading: true });
 
     await axios({
       method: 'POST',
-      url: 'http://localhost:9088/api/v1/receipt',
+      url: '/api/v1/receipt',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'

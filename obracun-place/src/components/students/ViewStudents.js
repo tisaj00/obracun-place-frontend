@@ -50,7 +50,6 @@ class ViewStudents extends Component {
         const { cookies, toastManager } = props;
         this.state = {
             students: [],
-            xsrfToken: cookies.get('XSRF-TOKEN'),
             isLoading: false,
             totalElements: null,
             studentToDelete: this.emptyStudent,
@@ -98,9 +97,8 @@ class ViewStudents extends Component {
 
     async deleteStudent() {
         this.setState({ isLoading: true });
-        await axios.delete(`http://localhost:9088/api1/delete-student/${this.state.studentToDelete.id}`, {
+        await axios.delete(`/api/delete-student/${this.state.studentToDelete.id}`, {
             headers: {
-                'X-XSRF-TOKEN': this.state.xsrfToken,
                 'Accept': 'application/json'
             },
             withCredentials: true
@@ -126,10 +124,8 @@ class ViewStudents extends Component {
             })
     }
     async getAllStudents(page, size) {
-
-        await axios.get('http://localhost:9088/api1/all-students?&page=' + page + '&size=' + size, {
+        await axios.get('/api/all-students?&page=' + page + '&size=' + size, {
             headers: {
-                'X-XSRF-TOKEN': this.state.xsrfToken,
                 'Accept': 'application/json'
             },
             withCredentials: true
@@ -160,9 +156,8 @@ class ViewStudents extends Component {
     }
 
     async getStudentById(id) {
-        await axios.get(`http://localhost:9088/api1/${id}`, {
+        await axios.get(`/api/${id}`, {
             headers: {
-                'X-XSRF-TOKEN': this.state.xsrfToken,
                 'Accept': 'application/json'
             },
             withCredentials: true

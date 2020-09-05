@@ -24,7 +24,6 @@ class ViewPartners extends Component {
     const { cookies, toastManager } = props;
     this.state = {
       initialPartner: this.emptyPartner,
-      xsrfToken: cookies.get('XSRF-TOKEN'),
       isLoading: false,
       partners: [],
       modal: false,
@@ -59,7 +58,7 @@ class ViewPartners extends Component {
 
   async deletePartner() {
     this.setState({ isLoading: true });
-    await axios.delete(`http://localhost:9088/partner/delete/${this.state.partnerTodelete.id}`, {
+    await axios.delete(`/partner/delete/${this.state.partnerTodelete.id}`, {
       headers: {
         'Accept': 'application/json'
       },
@@ -87,8 +86,7 @@ class ViewPartners extends Component {
   }
 
   async getAllPartners(page, size) {
-
-    await axios.get('http://localhost:9088/partner/all?&page=' + page + '&size=' + size, {
+    await axios.get('/partner/all?&page=' + page + '&size=' + size, {
       headers: {
         'Accept': 'application/json'
       },
