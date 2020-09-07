@@ -15,6 +15,7 @@
     "firebase-tools": "^8.9.2",
     "iban": "0.0.14",
     "is-valid-oib": "^1.0.0",
+    "jwt-decode": "^2.2.0",
     "mdbreact": "^4.25.1",
     "moment": "^2.24.0",
     "radium": "^0.26.0",

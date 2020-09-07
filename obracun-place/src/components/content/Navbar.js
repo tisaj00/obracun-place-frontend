@@ -27,12 +27,38 @@ class NavBar extends React.Component {
     });
   }
 
+  async componentDidMount(){
+    this.getRole()
+  }
+
   async logout(event) {
     event.preventDefault();
-    localStorage.removeItem('token');
+    localStorage.removeItem('jwt');
+    localStorage.removeItem('username');
+    localStorage.removeItem('role');
     delete axios.defaults.headers.common['Authorization'];
     this.authFunc(undefined);
   }
+
+  async getRole() {
+    const username = localStorage.getItem('username');
+    await axios({
+        method: 'POST',
+        url: `/api/auth/${username}/admin`
+    })
+        .then(response => {
+            if (response.status !== 200) {
+
+            } else {
+                console.log("ADMIN", response.data.isAdmin)
+                this.setState({
+                    isAdmin: response.data.isAdmin
+                });
+            }
+        })
+        .catch(error => {
+        })
+}
 
   render() {
 
@@ -43,7 +69,7 @@ class NavBar extends React.Component {
         </Button>
 
         <strong>
-          Welcome, jtisaj{/* {this.state.user.name} ({this.state.user.user_name}) */}{/* ! Your role: SUPER_ADMIN */} {/* {this.state.user.roles[0]} */}
+          Welcome, {localStorage.getItem('username')}! Your role: {localStorage.getItem('role')}
         </strong>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>

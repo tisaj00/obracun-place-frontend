@@ -3,8 +3,6 @@
     justify-content: center;
     flex-direction: row;
     background-color:aqua;
-    
-
 }
 
 .body-card-registration {
@@ -44,7 +42,7 @@
   }
 
   .form-input-error {
-    color: #00add1;
+    color: #ff0000;
     font-size: 13px;
     display: block;
     margin-top: 5px;

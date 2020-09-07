@@ -24,6 +24,7 @@ class LoginForm extends React.Component {
         this.state = {
             userData: this.emptyUser
         };
+
         this.toastManager = toastManager;
         this.authFunc = authFunc;
         this.handleChange = this.handleChange.bind(this);
@@ -49,10 +50,13 @@ class LoginForm extends React.Component {
                             appearance: 'error', autoDismiss: true, autoDismissTimeout: 3000
                         }));
                 } else {
-                    this.authFunc();
-                    const token = `Bearer ${response.data.token}`
-                    localStorage.setItem('token', token);
-                    axios.defaults.headers.common['Authorization'] = token;
+                    console.log("LOGIN", response.data)
+                    this.authFunc(true);
+                    const jwt = `Bearer ${response.data.jwt}`
+                    localStorage.setItem('jwt', jwt);
+                    localStorage.setItem('username', response.data.username)
+                    localStorage.setItem('role', response.data.role)
+                    axios.defaults.headers.common['Authorization'] = jwt;
                     this.setState({ userData: this.newUserData, isLoading: false },
                         () => this.toastManager.add("Login successfully.", {
                             appearance: 'success', autoDismiss: true, autoDismissTimeout: 3000
@@ -75,8 +79,6 @@ class LoginForm extends React.Component {
 
         let userData = { ...this.state.userData };
         userData[name] = value;
-
-        console.log(userData)
         this.setState({ userData: userData });
     }
 

@@ -189,65 +189,59 @@ class RegistrationForm extends React.Component {
           <Col md={5}>
             <Card className="body-card-registration">
               <CardHeader className="header">SIGN UP</CardHeader>
-              {/* <Form spellCheck="false" onSubmit={this.signUp}> */}
-                <CardBody>
+              <CardBody>
+                <FormGroup row inline className={emailValidationMessage.length > 0 ? "form-input-error-displayed" : "form-input-error-not-displayed"}>
+                  <Label className="form-label" md={4}><strong>Username</strong></Label>
+                  <Col md={5}>
+                    <Input type="text" name="username" id="username" placeholder="Enter username" value={userData.username || ''} autoComplete="off" onChange={this.handleChange} />
+                    {!usernameValid && <span className="form-input-error">{usernameValidationMessage}</span>}
+                  </Col>
+                </FormGroup>
 
-                  <FormGroup row inline className={emailValidationMessage.length > 0 ? "form-input-error-displayed" : "form-input-error-not-displayed"}>
-                    <Label className="form-label" md={4}><strong>Username</strong></Label>
-                    <Col md={5}>
-                      <Input type="text" name="username" id="username" placeholder="Enter username" value={userData.username || ''} autoComplete="off" onChange={this.handleChange} />
-                      {!usernameValid && <span className="form-input-error">{usernameValidationMessage}</span>}
-                    </Col>
-                  </FormGroup>
+                <FormGroup row inline className={emailValidationMessage.length > 0 ? "form-input-error-displayed" : "form-input-error-not-displayed"}>
+                  <Label className="form-label" for="email" md={4}><strong>Email address</strong></Label>
+                  <Col md={5}>
+                    <Input type="text" name="email" id="email" placeholder="Enter email" autoComplete="off" value={userData.email || ''} onChange={this.handleChange} />
+                    {!emailValid && <span className="form-input-error">{emailValidationMessage}</span>}
+                  </Col>
+                </FormGroup>
 
-                  <FormGroup row inline className={emailValidationMessage.length > 0 ? "form-input-error-displayed" : "form-input-error-not-displayed"}>
-                    <Label className="form-label" for="email" md={4}><strong>Email address</strong></Label>
-                    <Col md={5}>
-                      <Input type="text" name="email" id="email" placeholder="Enter email" autoComplete="off" value={userData.email || ''} onChange={this.handleChange} />
-                      {!emailValid && <span className="form-input-error">{emailValidationMessage}</span>}
-                    </Col>
-                  </FormGroup>
+                <FormGroup row inline className={passwordValidationMessage.length > 0 || passwordMatchMessage.length > 0 ? "form-input-error-displayed" : "form-input-error-not-displayed"}>
+                  <Label className="form-label" for="password" md={4}><strong>Password</strong></Label>
+                  <Col md={5}>
+                    <Input type="password" name="password" id="password" placeholder="Enter password" autoComplete="off" value={userData.password || ''} onChange={this.handleChange} />
+                    {!passwordValid && <span className="form-input-error">{passwordValidationMessage}</span>}
+                  </Col>
+                </FormGroup>
 
-                  <FormGroup row inline className={passwordValidationMessage.length > 0 || passwordMatchMessage.length > 0 ? "form-input-error-displayed" : "form-input-error-not-displayed"}>
-                    <Label className="form-label" for="password" md={4}><strong>Password</strong></Label>
-                    <Col md={5}>
-                      <Input type="password" name="password" id="password" placeholder="Enter password" autoComplete="off" value={userData.password || ''} onChange={this.handleChange} />
-                      {!passwordValid && <span className="form-input-error">{passwordValidationMessage}</span>}
-                    </Col>
-                  </FormGroup>
+                <FormGroup row inline className={passwordValidationMessage.length > 0 || passwordMatchMessage.length > 0 ? "form-input-error-displayed" : "form-input-error-not-displayed"}>
+                  <Label className="form-label" for="password2" md={4}><strong>Confirm Password</strong></Label>
+                  <Col md={5}>
+                    <Input type="password" name="password2" id="password2" placeholder="Confirm password" autoComplete="off" value={userData.password2 || ''} onChange={this.handleChange} />
+                    {!password2Valid && <span className="form-input-error">{password2ValidationMessage}</span>}
+                  </Col>
+                </FormGroup>
 
-                  <FormGroup row inline className={passwordValidationMessage.length > 0 || passwordMatchMessage.length > 0 ? "form-input-error-displayed" : "form-input-error-not-displayed"}>
-                    <Label className="form-label" for="password2" md={4}><strong>Confirm Password</strong></Label>
-                    <Col md={5}>
-                      <Input type="password" name="password2" id="password2" placeholder="Confirm password" autoComplete="off" value={userData.password2 || ''} onChange={this.handleChange} />
-                      {!password2Valid && <span className="form-input-error">{password2ValidationMessage}</span>}
-                    </Col>
-                  </FormGroup>
+                <FormGroup row inline className={sexValidationMessage.length > 0 || passwordMatchMessage.length > 0 ? "form-input-error-displayed" : "form-input-error-not-displayed"}>
+                  <Label className="form-label" for="sex" md={4}><strong>Sex</strong></Label>
+                  <Col md={5}>
+                    <Input type="select" defaultValue="Select" name="sex" id="sex" onChange={this.handleChange} >
+                      <option disabled>Select</option>
+                      <option value="MALE">MALE</option>
+                      <option value="FEMALE">FEMALE</option>
+                    </Input>
+                    {!sexValid && <span className="form-input-error">{sexValidationMessage}</span>}
+                  </Col>
+                </FormGroup>
 
-                  <FormGroup row inline className={sexValidationMessage.length > 0 || passwordMatchMessage.length > 0 ? "form-input-error-displayed" : "form-input-error-not-displayed"}>
-                    <Label className="form-label" for="sex" md={4}><strong>Sex</strong></Label>
-                    <Col md={5}>
-                      <Input type="select" defaultValue="Select" name="sex" id="sex" onChange={this.handleChange} >
-                        <option disabled>Select</option>
-                        <option value="MALE">MALE</option>
-                        <option value="FEMALE">FEMALE</option>
-                      </Input>
-                      {!sexValid && <span className="form-input-error">{sexValidationMessage}</span>}
-                    </Col>
-                  </FormGroup>
-
-                  {passwordValid && !passwordMatch && <span className="form-input-error">{passwordMatchMessage}</span>}
-
-                  <Button className="submit-button" type="button" onClick={this.signUp}>Submit</Button><br />
-                  <Link style={{ color: 'black' }} to={"/"}>Already registered sign in?</Link>
-                </CardBody>
-             {/*  </Form> */}
+                {passwordValid && !passwordMatch && <span className="form-input-error">{passwordMatchMessage}</span>}
+                <Button className="submit-button" type="button" onClick={this.signUp}>Submit</Button><br />
+                <Link style={{ color: 'black' }} to={"/"}>Already registered sign in?</Link>
+              </CardBody>
             </Card>
           </Col>
-
         </Container>
       </Row>
-
     );
   }
 }

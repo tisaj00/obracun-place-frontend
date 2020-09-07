@@ -191,7 +191,7 @@ class ViewStudents extends Component {
             )
         }
 
-        const logo = require('./logo.png');
+        /* const isAdmin =(roles.includes('ROLE_ADMIN')) */
 
         const ViewStudent = <Modal isOpen={modalStudent} centered size="lg" >
             <ModalHeader style={{ backgroundColor: '#28a84b', fontWeight: 'bold', color: 'white' }}>View Student</ModalHeader>

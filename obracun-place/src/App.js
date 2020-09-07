@@ -13,11 +13,13 @@ import axios from "axios";
 import { withCookies, CookiesProvider, Cookies } from 'react-cookie';
 import { instanceOf } from 'prop-types';
 
+import jwtDecode from 'jwt-decode'
+
 class App extends Component {
 
     static propTypes = {
         cookies: instanceOf(Cookies).isRequired
-      };
+    };
 
     constructor(props) {
         super(props);
@@ -56,32 +58,46 @@ class App extends Component {
         }); */
     }
 
-   /*  getAccessToken() {
-        const { cookies } = this.props;
-        return cookies.get('access_token');
+    /*  getAccessToken() {
+         const { cookies } = this.props;
+         return cookies.get('access_token');
+     }
+ 
+     getRefreshToken() {
+         const { cookies } = this.props;
+         return cookies.get('refresh_token');
+     }
+ 
+     setTokens(response) {
+         const { cookies } = this.props;
+         cookies.set('access_token', response.data.access_token);
+         cookies.set('refresh_token', response.data.refresh_token);
+     }
+ 
+     clearTokens() {
+         const { cookies } = this.props;
+         cookies.remove('access_token');
+         cookies.remove('refresh_token');
+     }
+ */
+
+    token = localStorage.getItem('token');
+    if(token) {
+        const decodedToken = jwtDecode(token);
+        if (decodedToken.exp * 5 < Date.now()) {
+            /* store.dispatch(logoutUser()); */
+            window.location.href = '/sign-in';
+        } else {
+            /* store.dispatch({ type: SET_AUTHENTICATED }); */
+            axios.defaults.headers.common['Authorization'] = token;
+            /* store.dispatch(getUserData()); */
+        }
     }
 
-    getRefreshToken() {
-        const { cookies } = this.props;
-        return cookies.get('refresh_token');
-    }
-
-    setTokens(response) {
-        const { cookies } = this.props;
-        cookies.set('access_token', response.data.access_token);
-        cookies.set('refresh_token', response.data.refresh_token);
-    }
-
-    clearTokens() {
-        const { cookies } = this.props;
-        cookies.remove('access_token');
-        cookies.remove('refresh_token');
-    }
-*/
     toggle = () => {
         this.setState({ isOpen: !this.state.isOpen });
     }
- 
+
     refresh() {
         this.setState({ isAuthenticated: !this.state.isAuthenticated });
     }
@@ -89,6 +105,8 @@ class App extends Component {
     async componentDidMount() {
         this.setState({ isLoading: false })
     }
+
+    
 
 
     render() {
@@ -104,6 +122,19 @@ class App extends Component {
                 <CookiesProvider>
 
                     <Router>
+
+                        {/* <Router>
+                            <div className="container">
+                                <Navbar />
+                                <Switch>
+                                    <Route exact path="/" component={home} />
+                                    <AuthRoute exact path="/login" component={login} />
+                                    <AuthRoute exact path="/signup" component={signup} />
+                                    <Route exact path="/users/:username" component={user} />
+                                </Switch>
+                            </div>
+                        </Router> */}
+
                         <div className="App wrapper">
                             {this.state.isAuthenticated && <SideBar toggle={this.toggle} isOpen={this.state.isOpen} />}
 
